@@ -179,7 +179,7 @@ class Layer {
   /**
    * @brief Returns the vector of learnable parameter blobs.
    */
-  vector<shared_ptr<Blob<Dtype> > >& blobs() {
+  vector<std::shared_ptr<Blob<Dtype> > >& blobs() {
     return blobs_;
   }
 
@@ -323,7 +323,7 @@ class Layer {
   /** The phase: TRAIN or TEST */
   Phase phase_;
   /** The vector that stores the learnable parameters as a set of blobs. */
-  vector<shared_ptr<Blob<Dtype> > > blobs_;
+  vector<std::shared_ptr<Blob<Dtype> > > blobs_;
   /** Vector indicating whether to compute the diff of each param blob. */
   vector<bool> param_propagate_down_;
 
@@ -432,7 +432,7 @@ class Layer {
   bool is_shared_;
 
   /** The mutex for sequential forward if this layer is shared */
-  shared_ptr<boost::mutex> forward_mutex_;
+  std::shared_ptr<boost::mutex> forward_mutex_;
 
   /** Initialize forward_mutex_ */
   void InitMutex();

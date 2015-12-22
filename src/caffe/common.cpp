@@ -1,4 +1,4 @@
-#include <boost/thread.hpp>
+//#include <boost/thread.hpp>
 #include <glog/logging.h>
 #include <cmath>
 #include <cstdio>
@@ -13,7 +13,6 @@ namespace caffe {
 
 // Make sure each thread can have different values.
 thread_local std::unique_ptr<Caffe> thread_instance_;
-//static boost::thread_specific_ptr<Caffe> thread_instance_;
 
 Caffe& Caffe::Get() {
   if (!thread_instance_.get()) {
@@ -80,7 +79,7 @@ class Caffe::RNG::Generator {
   explicit Generator(unsigned int seed) : rng_(new caffe::rng_t(seed)) {}
   caffe::rng_t* rng() { return rng_.get(); }
  private:
-  shared_ptr<caffe::rng_t> rng_;
+  std::shared_ptr<caffe::rng_t> rng_;
 };
 
 Caffe::RNG::RNG() : generator_(new Generator()) { }
@@ -202,7 +201,7 @@ class Caffe::RNG::Generator {
   explicit Generator(unsigned int seed) : rng_(new caffe::rng_t(seed)) {}
   caffe::rng_t* rng() { return rng_.get(); }
  private:
-  shared_ptr<caffe::rng_t> rng_;
+  std::shared_ptr<caffe::rng_t> rng_;
 };
 
 Caffe::RNG::RNG() : generator_(new Generator()) { }

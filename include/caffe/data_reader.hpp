@@ -1,5 +1,7 @@
 #ifndef CAFFE_DATA_READER_HPP_
 #define CAFFE_DATA_READER_HPP_
+//12/21/15: mz changed boost weak_ptr to std weak_ptr
+#include <memory>
 
 #include <map>
 #include <string>
@@ -56,7 +58,7 @@ class DataReader {
     void read_one(db::Cursor* cursor, QueuePair* qp);
 
     const LayerParameter param_;
-    BlockingQueue<shared_ptr<QueuePair> > new_queue_pairs_;
+    BlockingQueue<std::shared_ptr<QueuePair> > new_queue_pairs_;
 
     friend class DataReader;
 
@@ -69,10 +71,10 @@ class DataReader {
     return param.name() + ":" + param.data_param().source();
   }
 
-  const shared_ptr<QueuePair> queue_pair_;
-  shared_ptr<Body> body_;
+  const std::shared_ptr<QueuePair> queue_pair_;
+  std::shared_ptr<Body> body_;
 
-  static map<const string, boost::weak_ptr<DataReader::Body> > bodies_;
+  static map<const string, std::weak_ptr<DataReader::Body> > bodies_;
 
 DISABLE_COPY_AND_ASSIGN(DataReader);
 };

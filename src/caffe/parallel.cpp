@@ -67,14 +67,14 @@ static size_t total_size(const vector<Blob<Dtype>*>& params) {
 }
 
 template<typename Dtype>
-Params<Dtype>::Params(shared_ptr<Solver<Dtype> > root_solver)
+Params<Dtype>::Params(std::shared_ptr<Solver<Dtype> > root_solver)
     : size_(total_size<Dtype>(root_solver->net()->learnable_params())),
       data_(),
       diff_() {
 }
 
 template<typename Dtype>
-GPUParams<Dtype>::GPUParams(shared_ptr<Solver<Dtype> > root_solver, int device)
+GPUParams<Dtype>::GPUParams(std::shared_ptr<Solver<Dtype> > root_solver, int device)
     : Params<Dtype>(root_solver) {
 #ifndef CPU_ONLY
   int initial_device;
@@ -199,7 +199,7 @@ void DevicePair::compute(const vector<int> devices, vector<DevicePair>* pairs) {
 //
 
 template<typename Dtype>
-P2PSync<Dtype>::P2PSync(shared_ptr<Solver<Dtype> > root_solver,
+P2PSync<Dtype>::P2PSync(std::shared_ptr<Solver<Dtype> > root_solver,
                         P2PSync<Dtype>* parent, const SolverParameter& param)
     : GPUParams<Dtype>(root_solver, param.device_id()),
       parent_(parent),
@@ -391,7 +391,7 @@ void P2PSync<Dtype>::run(const vector<int>& gpus) {
   LOG(INFO)<< "GPUs pairs " << s.str();
 
   SolverParameter param(solver_->param());
-  vector<shared_ptr<P2PSync<Dtype> > > syncs(gpus.size());
+  vector<std::shared_ptr<P2PSync<Dtype> > > syncs(gpus.size());
 
   // Build the GPU tree by finding the parent for each solver
   for (int attempts = 0; attempts < pairs.size(); ++attempts) {

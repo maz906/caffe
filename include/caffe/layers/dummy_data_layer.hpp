@@ -40,7 +40,7 @@ class DummyDataLayer : public Layer<Dtype> {
   virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
       const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {}
 
-  vector<shared_ptr<Filler<Dtype> > > fillers_;
+  vector<std::shared_ptr<Filler<Dtype> > > fillers_;
   vector<bool> refill_;
 };
 

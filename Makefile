@@ -379,13 +379,22 @@ LIBRARY_DIRS += $(BLAS_LIB)
 LIBRARY_DIRS += $(LIB_BUILD_DIR)
 
 # Automatic dependency generation (nvcc is handled separately)
-# maz906 added -O4 and -std=c++14
-CXXFLAGS += -MMD -MP -O4 -std=c++14
+# 12/20/15: added -O4 instead of -O3
+CXXFLAGS += -MMD -MP -O4 
+
+# 12/21/15: maz906 added -std=c++14
+# 12/22/15: tried using g++-4.8 to resolve issue. can't use c++14 in g++-4.8
+CXXFLAGS += -std=c++11
+CCFLAGS += -mmwaitx -std=c++11
 
 # Complete build flags.
 COMMON_FLAGS += $(foreach includedir,$(INCLUDE_DIRS),-I$(includedir))
 CXXFLAGS += -pthread -fPIC $(COMMON_FLAGS) $(WARNINGS)
 NVCCFLAGS += -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)
+
+# 12/21/15: maz906 added
+NVCCFLAGS += -std=c++11 
+
 # mex may invoke an older gcc that is too liberal with -Wuninitalized
 MATLAB_CXXFLAGS := $(CXXFLAGS) -Wno-uninitialized
 LINKFLAGS += -pthread -fPIC $(COMMON_FLAGS) $(WARNINGS)

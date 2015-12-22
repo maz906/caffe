@@ -41,7 +41,7 @@ class BaseDataLayer : public Layer<Dtype> {
 
  protected:
   TransformationParameter transform_param_;
-  shared_ptr<DataTransformer<Dtype> > data_transformer_;
+  std::shared_ptr<DataTransformer<Dtype> > data_transformer_;
   bool output_labels_;
 };
 

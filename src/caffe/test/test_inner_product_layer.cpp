@@ -51,7 +51,7 @@ TYPED_TEST(InnerProductLayerTest, TestSetUp) {
   InnerProductParameter* inner_product_param =
       layer_param.mutable_inner_product_param();
   inner_product_param->set_num_output(10);
-  shared_ptr<InnerProductLayer<Dtype> > layer(
+  std::shared_ptr<InnerProductLayer<Dtype> > layer(
       new InnerProductLayer<Dtype>(layer_param));
   layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
   EXPECT_EQ(this->blob_top_->num(), 2);
@@ -77,7 +77,7 @@ TYPED_TEST(InnerProductLayerTest, TestForward) {
     inner_product_param->mutable_bias_filler()->set_type("uniform");
     inner_product_param->mutable_bias_filler()->set_min(1);
     inner_product_param->mutable_bias_filler()->set_max(2);
-    shared_ptr<InnerProductLayer<Dtype> > layer(
+    std::shared_ptr<InnerProductLayer<Dtype> > layer(
         new InnerProductLayer<Dtype>(layer_param));
     layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
     layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);
@@ -108,7 +108,7 @@ TYPED_TEST(InnerProductLayerTest, TestForwardNoBatch) {
     inner_product_param->mutable_bias_filler()->set_type("uniform");
     inner_product_param->mutable_bias_filler()->set_min(1);
     inner_product_param->mutable_bias_filler()->set_max(2);
-    shared_ptr<InnerProductLayer<Dtype> > layer(
+    std::shared_ptr<InnerProductLayer<Dtype> > layer(
         new InnerProductLayer<Dtype>(layer_param));
     layer->SetUp(this->blob_bottom_vec_, this->blob_top_vec_);
     layer->Forward(this->blob_bottom_vec_, this->blob_top_vec_);

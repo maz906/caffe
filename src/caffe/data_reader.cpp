@@ -1,4 +1,9 @@
-#include <boost/thread.hpp>
+//#include <boost/thread.hpp>
+#include <mutex>
+#include <thread>
+
+#include <memory>
+
 #include <map>
 #include <string>
 #include <vector>
@@ -10,16 +15,20 @@
 
 namespace caffe {
 
-using boost::weak_ptr;
+//12/21/15: changed to std::weak_ptr
+using std::weak_ptr;
+//using boost::weak_ptr;
 
 map<const string, weak_ptr<DataReader::Body> > DataReader::bodies_;
-static boost::mutex bodies_mutex_;
+static std::mutex bodies_mutex_;
 
 DataReader::DataReader(const LayerParameter& param)
     : queue_pair_(new QueuePair(  //
         param.data_param().prefetch() * param.data_param().batch_size())) {
   // Get or create a body
-  boost::mutex::scoped_lock lock(bodies_mutex_);
+	//12/21/15: mz changed to use std::lock_guard
+	std::lock_guard<std::mutex> lock(bodies_mutex_);
+  //boost::mutex::scoped_lock lock(bodies_mutex_);
   string key = source_key(param);
   weak_ptr<Body>& weak = bodies_[key];
   body_ = weak.lock();
@@ -33,7 +42,8 @@ DataReader::DataReader(const LayerParameter& param)
 DataReader::~DataReader() {
   string key = source_key(body_->param_);
   body_.reset();
-  boost::mutex::scoped_lock lock(bodies_mutex_);
+	std::lock_guard<std::mutex> lock(bodies_mutex_);
+  //boost::mutex::scoped_lock lock(bodies_mutex_);
   if (bodies_[key].expired()) {
     bodies_.erase(key);
   }
@@ -71,10 +81,10 @@ DataReader::Body::~Body() {
 }
 
 void DataReader::Body::InternalThreadEntry() {
-  shared_ptr<db::DB> db(db::GetDB(param_.data_param().backend()));
+  std::shared_ptr<db::DB> db(db::GetDB(param_.data_param().backend()));
   db->Open(param_.data_param().source(), db::READ);
-  shared_ptr<db::Cursor> cursor(db->NewCursor());
-  vector<shared_ptr<QueuePair> > qps;
+  std::shared_ptr<db::Cursor> cursor(db->NewCursor());
+  vector<std::shared_ptr<QueuePair> > qps;
   try {
     int solver_count = param_.phase() == TRAIN ? Caffe::solver_count() : 1;
 
@@ -82,7 +92,7 @@ void DataReader::Body::InternalThreadEntry() {
     // are ready. But solvers need to peek on one item during initialization,
     // so read one item, then wait for the next solver.
     for (int i = 0; i < solver_count; ++i) {
-      shared_ptr<QueuePair> qp(new_queue_pairs_.pop());
+      std::shared_ptr<QueuePair> qp(new_queue_pairs_.pop());
       read_one(cursor.get(), qp.get());
       qps.push_back(qp);
     }
@@ -97,9 +107,11 @@ void DataReader::Body::InternalThreadEntry() {
       // name and same source.
       CHECK_EQ(new_queue_pairs_.size(), 0);
     }
-  } catch (boost::thread_interrupted&) {
-    // Interrupted exception is expected on shutdown
-  }
+		} catch (std::exception&) { }
+		//12/21/15: mz: std library doesn't have thread_interrupted so just using std::exception for now
+//  } catch (boost::thread_interrupted&) {
+//    // Interrupted exception is expected on shutdown
+//  }
 }
 
 void DataReader::Body::read_one(db::Cursor* cursor, QueuePair* qp) {

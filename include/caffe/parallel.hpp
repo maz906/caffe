@@ -22,7 +22,7 @@ namespace caffe {
 template<typename Dtype>
 class Params {
  public:
-  explicit Params(shared_ptr<Solver<Dtype> > root_solver);
+  explicit Params(std::shared_ptr<Solver<Dtype> > root_solver);
   virtual ~Params() {
   }
 
@@ -48,7 +48,7 @@ DISABLE_COPY_AND_ASSIGN(Params);
 template<typename Dtype>
 class GPUParams : public Params<Dtype> {
  public:
-  GPUParams(shared_ptr<Solver<Dtype> > root_solver, int device);
+  GPUParams(std::shared_ptr<Solver<Dtype> > root_solver, int device);
   virtual ~GPUParams();
 
   void configure(Solver<Dtype>* solver) const;
@@ -85,11 +85,11 @@ template<typename Dtype>
 class P2PSync : public GPUParams<Dtype>, public Solver<Dtype>::Callback,
     public InternalThread {
  public:
-  explicit P2PSync(shared_ptr<Solver<Dtype> > root_solver,
+  explicit P2PSync(std::shared_ptr<Solver<Dtype> > root_solver,
                    P2PSync<Dtype>* parent, const SolverParameter& param);
   virtual ~P2PSync();
 
-  inline const shared_ptr<Solver<Dtype> >& solver() const {
+  inline const std::shared_ptr<Solver<Dtype> >& solver() const {
     return solver_;
   }
 
@@ -106,7 +106,7 @@ class P2PSync : public GPUParams<Dtype>, public Solver<Dtype>::Callback,
   BlockingQueue<P2PSync<Dtype>*> queue_;
   const int initial_iter_;
   Dtype* parent_grads_;
-  shared_ptr<Solver<Dtype> > solver_;
+  std::shared_ptr<Solver<Dtype> > solver_;
 
   using Params<Dtype>::size_;
   using Params<Dtype>::data_;

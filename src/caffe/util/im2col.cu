@@ -1,5 +1,6 @@
 #include <algorithm>
 
+//12/22/15: mz investigating if this file actually needs common.hpp
 #include "caffe/common.hpp"
 #include "caffe/util/im2col.hpp"
 
