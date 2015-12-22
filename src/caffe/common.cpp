@@ -4,13 +4,16 @@
 #include <cstdio>
 #include <ctime>
 
+#include <memory>
+
 #include "caffe/common.hpp"
 #include "caffe/util/rng.hpp"
 
 namespace caffe {
 
 // Make sure each thread can have different values.
-static boost::thread_specific_ptr<Caffe> thread_instance_;
+thread_local std::unique_ptr<Caffe> thread_instance_;
+//static boost::thread_specific_ptr<Caffe> thread_instance_;
 
 Caffe& Caffe::Get() {
   if (!thread_instance_.get()) {

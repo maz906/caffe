@@ -59,7 +59,9 @@ configure_file(cmake/Templates/caffe_config.h.in "${PROJECT_BINARY_DIR}/caffe_co
 set(Caffe_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 include_directories(${Caffe_INCLUDE_DIR} ${PROJECT_BINARY_DIR})
 include_directories(BEFORE src) # This is needed for gtest.
-
+include_directories(/usr/local/cuda-7.5/targets/x86_64-linux/include/)
+link_directories(/usr/local/cuda-7.5/targets/x86_64-linux/lib/)
+link_directories(/usr/local/cuda/targets/x86_64-linux/lib/)
 # ---[ Subdirectories
 add_subdirectory(src/gtest)
 add_subdirectory(src/caffe)
