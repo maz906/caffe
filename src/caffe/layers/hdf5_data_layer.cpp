@@ -7,6 +7,7 @@ TODO:
 - add ability to shuffle filenames if flag is set
 */
 #include <fstream>  // NOLINT(readability/streams)
+#include <memory>
 #include <string>
 #include <vector>
 

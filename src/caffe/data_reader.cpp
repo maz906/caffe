@@ -1,4 +1,3 @@
-//#include <boost/thread.hpp>
 #include <mutex>
 #include <thread>
 
@@ -17,7 +16,6 @@ namespace caffe {
 
 //12/21/15: changed to std::weak_ptr
 using std::weak_ptr;
-//using boost::weak_ptr;
 
 map<const string, weak_ptr<DataReader::Body> > DataReader::bodies_;
 static std::mutex bodies_mutex_;
@@ -28,7 +26,6 @@ DataReader::DataReader(const LayerParameter& param)
   // Get or create a body
 	//12/21/15: mz changed to use std::lock_guard
 	std::lock_guard<std::mutex> lock(bodies_mutex_);
-  //boost::mutex::scoped_lock lock(bodies_mutex_);
   string key = source_key(param);
   weak_ptr<Body>& weak = bodies_[key];
   body_ = weak.lock();
@@ -43,7 +40,6 @@ DataReader::~DataReader() {
   string key = source_key(body_->param_);
   body_.reset();
 	std::lock_guard<std::mutex> lock(bodies_mutex_);
-  //boost::mutex::scoped_lock lock(bodies_mutex_);
   if (bodies_[key].expired()) {
     bodies_.erase(key);
   }
@@ -109,9 +105,6 @@ void DataReader::Body::InternalThreadEntry() {
     }
 		} catch (std::exception&) { }
 		//12/21/15: mz: std library doesn't have thread_interrupted so just using std::exception for now
-//  } catch (boost::thread_interrupted&) {
-//    // Interrupted exception is expected on shutdown
-//  }
 }
 
 void DataReader::Body::read_one(db::Cursor* cursor, QueuePair* qp) {

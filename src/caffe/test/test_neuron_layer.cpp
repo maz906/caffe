@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <memory>
 #include <vector>
 
 #include "google/protobuf/text_format.h"

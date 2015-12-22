@@ -1,4 +1,6 @@
+//TODO: change
 #include <boost/thread.hpp>
+#include <memory>
 #include <string>
 
 #include "caffe/data_reader.hpp"

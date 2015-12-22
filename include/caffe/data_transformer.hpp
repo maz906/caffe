@@ -1,6 +1,7 @@
 #ifndef CAFFE_DATA_TRANSFORMER_HPP
 #define CAFFE_DATA_TRANSFORMER_HPP
 
+#include <memory>
 #include <vector>
 
 #include "caffe/blob.hpp"

@@ -1,6 +1,7 @@
 #ifndef CAFFE_WINDOW_DATA_LAYER_HPP_
 #define CAFFE_WINDOW_DATA_LAYER_HPP_
 
+#include <memory>
 #include <string>
 #include <utility>
 #include <vector>

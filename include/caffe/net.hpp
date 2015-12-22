@@ -2,6 +2,7 @@
 #define CAFFE_NET_HPP_
 
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <utility>

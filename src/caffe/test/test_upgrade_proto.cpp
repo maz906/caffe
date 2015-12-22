@@ -1,6 +1,8 @@
+#include <memory>
 #include <string>
 #include <vector>
 
+// TODO: mz: how to replace? with shared_ptr?
 #include "boost/scoped_ptr.hpp"
 #include "google/protobuf/text_format.h"
 #include "gtest/gtest.h"

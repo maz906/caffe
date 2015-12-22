@@ -1,6 +1,8 @@
 #include <map>
+#include <memory>
 #include <string>
 
+//TODO: mz: how to change? shared_ptr?
 #include "boost/scoped_ptr.hpp"
 #include "google/protobuf/text_format.h"
 #include "gtest/gtest.h"

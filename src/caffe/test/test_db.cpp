@@ -1,6 +1,7 @@
 #if defined(USE_LEVELDB) && defined(USE_LMDB) && defined(USE_OPENCV)
 #include <string>
 
+//TODO: change
 #include "boost/scoped_ptr.hpp"
 #include "gtest/gtest.h"
 

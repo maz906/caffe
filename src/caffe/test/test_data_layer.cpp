@@ -1,7 +1,9 @@
 #ifdef USE_OPENCV
+#include <memory>
 #include <string>
 #include <vector>
 
+//TODO: change
 #include "boost/scoped_ptr.hpp"
 #include "gtest/gtest.h"
 

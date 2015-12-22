@@ -1,6 +1,7 @@
 #ifndef CAFFE_SGD_SOLVERS_HPP_
 #define CAFFE_SGD_SOLVERS_HPP_
 
+#include <memory>
 #include <string>
 #include <vector>
 

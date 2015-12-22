@@ -4,10 +4,12 @@
 #include <glog/logging.h>
 #include <stdio.h>
 
+#include <memory>
 #include <sstream>
 #include <string>
 #include <vector>
 
+//TODO: change
 #include "boost/thread.hpp"
 #include "caffe/caffe.hpp"
 #include "caffe/parallel.hpp"

@@ -1,3 +1,4 @@
+#include <memory>
 #include <vector>
 
 #include "caffe/sgd_solvers.hpp"

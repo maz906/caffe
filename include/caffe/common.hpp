@@ -1,7 +1,6 @@
 #ifndef CAFFE_COMMON_HPP_
 #define CAFFE_COMMON_HPP_
 
-//#include <boost/std::shared_ptr.hpp>
 #include <memory>
 
 #include <gflags/gflags.h>
@@ -75,8 +74,6 @@ namespace caffe {
 // We will use the boost std::shared_ptr instead of the new C++11 one mainly
 // because cuda does not work (at least now) well with C++11 features.
 // 12/21/15: mz changed to std::shared_ptr
-//using std::shared_ptr;
-//typedef std::shared_ptr std::shared_ptr;
 
 // Common functions and classes from std that caffe often uses.
 using std::fstream;

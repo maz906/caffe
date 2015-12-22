@@ -1,6 +1,7 @@
 #ifndef CAFFE_SIGMOID_CROSS_ENTROPY_LOSS_LAYER_HPP_
 #define CAFFE_SIGMOID_CROSS_ENTROPY_LOSS_LAYER_HPP_
 
+#include <memory>
 #include <vector>
 
 #include "caffe/blob.hpp"

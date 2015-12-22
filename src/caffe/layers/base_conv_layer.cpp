@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <memory>
 #include <vector>
 
 #include "caffe/filler.hpp"

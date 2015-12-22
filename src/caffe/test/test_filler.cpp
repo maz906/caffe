@@ -4,6 +4,8 @@
 
 #include "caffe/test/test_caffe_main.hpp"
 
+#include <memory>
+
 namespace caffe {
 
 template <typename Dtype>

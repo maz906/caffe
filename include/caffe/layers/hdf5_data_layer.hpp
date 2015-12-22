@@ -3,6 +3,7 @@
 
 #include "hdf5.h"
 
+#include <memory>
 #include <string>
 #include <vector>
 

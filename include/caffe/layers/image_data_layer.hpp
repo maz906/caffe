@@ -1,6 +1,7 @@
 #ifndef CAFFE_IMAGE_DATA_LAYER_HPP_
 #define CAFFE_IMAGE_DATA_LAYER_HPP_
 
+#include <memory>
 #include <string>
 #include <utility>
 #include <vector>

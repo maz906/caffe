@@ -1,6 +1,7 @@
 #ifndef CAFFE_DATA_LAYERS_HPP_
 #define CAFFE_DATA_LAYERS_HPP_
 
+#include <memory>
 #include <vector>
 
 #include "caffe/blob.hpp"

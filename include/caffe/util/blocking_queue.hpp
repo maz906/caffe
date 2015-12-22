@@ -2,6 +2,7 @@
 #define CAFFE_UTIL_BLOCKING_QUEUE_HPP_
 
 #include <queue>
+#include <memory>
 #include <string>
 
 namespace caffe {

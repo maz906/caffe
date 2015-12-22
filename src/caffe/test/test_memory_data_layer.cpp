@@ -2,6 +2,7 @@
 #include <opencv2/core/core.hpp>
 #endif  // USE_OPENCV
 
+#include <memory>
 #include <string>
 #include <vector>
 

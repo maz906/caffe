@@ -40,6 +40,7 @@
 #define CAFFE_LAYER_FACTORY_H_
 
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
